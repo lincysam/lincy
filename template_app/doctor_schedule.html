@@ -1,0 +1,27 @@
+
+
+	
+	{% extends "doctor_details.html" %}
+		{% block content %}
+	<center><h4>Scheduled Appointments</h4></center>
+	<table cellpadding="2" cellspacing="2" align="center" border="2">
+				<tr>
+					
+					<th>Hospital</th>
+					<th>Patient Id</th>
+					<th>Patient Name</th>
+					<th>Appointment Date</th>
+				</tr>
+					{% for eachobj in schedule %}
+				<tr>
+					<td>{{eachobj.hospital}}</td>
+					<td>{{eachobj.patientid}}</td>
+					<td>{{eachobj.patient}}</td>
+					<td>{{eachobj.consult_day}}</td>
+					
+				</tr>
+					   {% endfor %}
+				
+			</table>
+		    {% endblock %}
+		

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			
+			.list{
+		position: absolute;
+
+		top: 10px;
+
+		right: 20px;
+
+		font-size: 20px
+	}
+	.first {
+  
+  width: 50%;
+  float:left;
+  margin: 15px auto;
+  display: inline-block;
+  overflow: auto;
+  
+  
+}
+	body{
+		{% load static %}
+		background-image:url("{% static 'images/pic1.jpeg' %}");
+	}
+		</style>
+	
+	</head>
+	<body>
+		<div class="list">
+		<a href="/home">Logout</a><br><br>
+		</div>
+		<div class="first">
+		<form method="post" action="/doctoraccount/doctordetails">
+			{% csrf_token %}
+			<div class="container">
+				{{result}}
+				<h3>{{invalidmsg}}</h3>
+				<h2>{{msg}}</h2>
+			<table   cellpadding:"2" cellspacing:"2">
+				<th><h2>Doctor Login</h2></th>
+				<tr>
+					<td><b>Username:</b> <input style="margin-left:14px;height:30px" type="text" name="dname"></td>
+					<td><a href="/doctor/doctorreg">SIGN UP</a></td>
+					<br>
+					
+				</tr>
+				<tr>
+					<td><b>Password:</b> <input style="margin-left:14px;height:30px" type="password" name="dpwd"></td><br>
+				</tr>
+				<tr>
+					<td align="center">
+						<a href="forgotpwd.html"><i>forgot password</i></a>
+						<input type="submit" value="Login" style="background:skyblue"></td>
+					
+				
+				</tr>
+			</table>
+			</div>
+		</form>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	</head>
+	<body>
+		<h2>Query selector</h2>
+		<h4> class="Profile">Profile Created</h4> 
+		<form class="myform" id="testform">
+		   {% csrf_token %}
+		<input type="text" id="name" name="name" placeholder="name">
+		<input type="email" id="email" name="email" placeholder="Email">
+		<!--<select id="state">
+			<option value="kerala">Kerala</option>
+			<option value="karnataka">Karnataka</option>
+			<option value="Delhi">Delhi</option>
+		</select>-->
+		<button type="submit" id="btnsub">Submit</button>
+		</form>
+		<script src="/js/jquery.js"></script>
+		<script>
+			$("document").on( 'submit','#testform' function(e) {
+					e.preventDefault();
+					$.ajax({
+						type:'POST',
+						url:'\create'
+						data:{
+							pname:$('#name').val(),
+							pemail:$('#email').val(),
+							csrtmiddlewaretoken:$('input[name-csrtmiddlewaretoken]').val(),
+								
+								},
+							success: function(data){
+								("h4").html(data)
+								}
+							})
+
+								} );
+			
+		</script>
+		
+	</body>
+</html>

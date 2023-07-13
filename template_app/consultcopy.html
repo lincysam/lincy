@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			body{
+				background-color:LightGray;
+			}
+			.container{
+			padding:100px 200px
+			}
+			
+		.back{
+			position: absolute;
+
+		top: 10px;
+
+		right: 20px;
+
+		font-size: 20px
+		}
+		
+		</style>
+		
+
+		{% load static %} 
+			<!--<script src="/js/jquery.js" type="text/javascript"></script> -->
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+			
+	</head>
+	<body>
+		<form  method="post" action="/patientaccount/newdata">
+		<div class="back">
+				<a href="/doctor/plogin">Logout</a><br><br>
+			</div>
+		
+			<h1><center>Patient Consultation</center></h1>
+			
+			{% csrf_token %}
+				<!--<h2>{{patientid}}</h2>
+				{% for patient in pdata %}
+				<h2>Welcome {{patient.fname}}</h2>
+				{% endfor %}-->
+			<div id="first">
+			<b><label>Hospitals</label></b>
+			<select id="hosptname" name="hosptname" style="margin-left:60px">
+				<option value="select">--select--</option>
+				{% for hospt in hosptdata %}
+				<option value='{{hospt.id}}'>{{hospt.hosptname}}</option>
+				{% endfor %}
+			</select><br><br>
+			
+			<b><label> Department</label></b>
+			<select id="deptname" name="deptname" style="margin-left:40px">
+				<option value="select">--select--</option>
+				
+				{% for dept in deptdata %}
+				<option value='{{dept.id}}'>{{dept.deptname}}</option>
+				{% endfor %}
+			</select><br><br><br>
+			</div>
+			
+			<b><button  type="submit" id="book">Check Available Doctors</button></b>
+			<div class="doctable">
+				<table id="datatable" cellspacing="10px" cellpadding="10px">
+					<thead>
+						<tr>
+							<th>S.No</th>
+							<th>Doctor Name</th>
+							
+							
+							
+							
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td></td>
+							
+							
+							<td></td>
+							<td></td>
+						</tr>
+							
+							
+					</tbody>
+					
+				</table>
+			</div>
+			
+			
+		
+		</form>
+
+<script>
+				
+					
+			
+$('#book').click(function(e){
+e.preventDefault();
+	$.ajax({
+		type: "GET",
+		url: "/patientaccount/newdata",
+		datatype:'json',
+		 
+	data: {
+		
+	'dept':$('#hosptname').val(),
+	'hospt':$('#deptname').val(),
+	//csrfmiddlewaretoken = $('input[name=csrfmiddlewaretoken]').val()				
+			},	
+		success:function(response){
+			
+			
+			$('#datatable tbody').empty()
+			data=response.datas
+			console.log(data)
+			for(i=0;i<data.length;i++){
+				$('#datatable tbody').append(
+				`<tr>
+					<td>${i+1}</td>
+					<td>${data[i].fname}</td>
+					
+					<td><button data="${data[i].id}" id="booking">Book Appointment</button></td>
+					
+					
+				</tr>`
+				)
+				}
+			
+			
+		},
+			
+								//error: function (response) {
+								 //alert(response["responseJSON"]["error"]);
+									//}
+					})
+				})
+		</script>
+	</body>
+</html>

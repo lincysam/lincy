@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			DoctorApp
+		</title>
+		{% load static %}
+		<link rel="stylesheet" href="{% static 'css/styledoctor.css' %}" />
+		<style>
+		body{
+				{% load static %}
+				background-image:url("{% static 'images/docimg.jpeg' %}");
+				
+			}
+		</style>
+	</head>
+	<body>
+		<h5 align="right">Doctor ID: {{docid}}</h5>
+		<h2><center> DoctorApp Application </center></h2><br>
+		
+		 {% block sidebar %}
+		<div class="menu">
+		<div class="container">
+					
+		<input type="hidden" value="{{docid}}">
+		<a href="/doctoraccount/doctorhome?doctorid={{docid}}">Home</a>
+		<a href="/doctoraccount/doctor_availability?doctorid={{docid}}">Your Availability</a>
+		
+		
+		<a href="/doctoraccount/doctor_schedule?doctorid={{docid}}">Scheduled Appointments</a>
+		
+		<a href="/doctoraccount/list?doctorid={{docid}}">List of Hospitals</a>
+			
+		
+		<a href="/doctor/dlogin">Logout</a>
+		</div>
+		</div>
+			{% endblock %}
+		<div class="datas">
+			{% block content %}{% endblock %}
+		</div>
+	</body>
+</html>

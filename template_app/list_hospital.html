@@ -1,0 +1,24 @@
+	{% extends "doctor_details.html" %}
+		{% block content %}
+				
+			<table cellpadding="2" cellspacing="2" align="center" border="2">
+				<tr>
+					<th>Hospital Name</th>
+					<th>Days</th>
+				</tr>
+				{% for i in listdata %}
+				
+				<tr>
+					
+					<td> {{i.hospital}}</td>
+					<td>{{i.available_days}}</td>
+					
+					<td><a href="/doctoraccount/doctordelete?eachid={{i.id}}&doctorid={{docid}}" > Delete</a></td>
+					<td><a href="/doctoraccount/doctorupdate?eachid={{i.id}}&doctorid={{docid}}">Edit</a></td>
+					
+				</tr>
+				{% endfor %}
+				
+			</table>
+		
+		 {% endblock %}

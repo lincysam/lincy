@@ -1,0 +1,29 @@
+
+	{% extends "patient_details.html" %}
+	{% block content %}
+	{% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+	
+	<h3>Welcome {{pid}}</h3>
+	<div>
+		<table cellpadding="2" cellspacing="2" align="center" border="2">
+			<tr>
+				<th>Patient Name</th>
+				<th>Hospital Name</th>
+				<th>Doctor</th>
+				<th>Appointment Date</th>
+			</tr>
+				{% for i in plist %}
+			<tr>
+				<td>{{i.patient}}</td>
+				<td>{{i.hospital}}</td>
+				<td>{{i.doctor}}</td>
+				<td>{{i.consult_day}}</td>
+				<td><a href="/patientaccount/cancelpatient?cancelid={{i.id}}&pid={{pid}}">Cancel</td>
+			</tr>
+				{% endfor %}
+		</table>
+	</div>
+     
+	 {% endblock %}
+	 

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		 {% block title %}
+		<title>
+			DoctorApp
+		</title>
+		{% endblock %}
+		
+		{% load static %}
+		<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+		<style>
+		body{
+				{% load static %}
+				background-image:url("{% static 'images/picnew.jpeg' %}");
+				
+			}
+		</style>
+	</head>
+	<body>
+				
+		
+		<h5 align="right">Patient ID: {{ pid}} </h5>
+		<h2><center>DoctorApp Application</center></h2><br>
+		   {% block sidebar %}
+		  
+		   <div class="menu">
+			<div class="container">
+			 <input type="hidden" name="pid" value='{{pid}}'>
+			<a href="/patientaccount/patientstate?patientid={{pid}}" class="active">Home</a>		
+			<a href="/patientaccount/consultation?patientid={{pid}}">Consultation</a>
+			
+			<a href="/patientaccount/patientbooklist?patientid={{pid}}">Appointments</a>
+			<a href="C:\Users\SHIJOTHOMAS\Desktop\Lin\DoctorApp\DoctorPOC\bill.html">Bills</a>
+			
+			<a href="/doctor/plogin">Logout</a>
+			{% endblock %}
+		</div>
+		</div>
+		<div class="datapart">
+		{% block content %}{% endblock %}
+		</div>	
+	</body>
+</html>

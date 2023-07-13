@@ -1,0 +1,112 @@
+
+
+	{% extends "patient_details.html" %}
+	{% block content %}
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+			
+			{% csrf_token %}
+			<h3>Welcome {{pid}}</h3>	
+			<div class="main" >	
+			<div id="first">
+			<input type="hidden" value="{{pid}}" name="patientid">
+			<b><label>Hospitals</label></b>
+			<select id="hosptname" name="hosptname" style="margin-left:100px">
+				<option value="select">--select--</option>
+				{% for hospt in hosptdata %}
+				<option value='{{hospt.id}}'>{{hospt.hosptname}}</option>
+				{% endfor %}
+			</select><br><br>
+			
+				<b><label> Department</label></b>
+			<select id="deptname" name="deptname" style="margin-left:80px">
+				<option value="select">--select--</option>
+				
+				{% for dept in deptdata %}
+				<option value='{{dept.id}}'>{{dept.deptname}}</option>
+				{% endfor %}
+			</select><br><br>
+			<b><label>Select Appointment Date</label</b>
+				<input style="margin-left:20px;height:25px" type="date" name="bookingdate" id="bookingdate" size="20"/><br><br>
+ 			<b><button  type="submit" id="book">Check Available Doctors</button></b><br>
+				
+	   </div><br>
+			
+			
+	   <div class="doctable">
+				<table id="datatable" cellspacing="10px" cellpadding="10px">
+					<thead>
+						<tr>
+							<th>S.No</th>
+							<th>Doctor Name</th>
+							<th>Available Days</th>
+						</tr>
+					</thead>
+					<tbody>
+						<td> </td>
+						<td id="dname"></td>	
+						<td id="availdays"></td>	
+					</tbody>
+					
+				</table>
+			</div>
+		</div>
+
+<script>
+									
+$('#book').click(function(e){
+e.preventDefault();
+	$.ajax({
+		type: "GET",
+		url: "/patientaccount/newdata",
+		datatype:'json',
+		 
+		data: {
+			
+			'dept':$('#hosptname').val(),
+			'hospt':$('#deptname').val(),
+			'appointdate':$('#bookingdate').val(),
+		//csrfmiddlewaretoken = $('input[name=csrfmiddlewaretoken]').val()				
+				},	
+			success:function(response){
+				
+				
+				$('#datatable tbody').empty()
+				data=response.datas
+				availability=response.avail
+				appoint=response.consultdate
+				console.log(data)
+				console.log(availability)
+				console.log(appoint)
+				for(i=0;i < data.length;i++)
+				{
+					
+					$('#datatable tbody').append(
+						
+						`
+						<tr>
+								
+							<td>${i+1}</td>
+							<td class="dname">${data[i][0].fname}`+" "+`${data[i][0].lname}</td>
+							<td>${availability[i].available_days}</td>
+							<td><a href="/patientaccount/booking?docid=${data[i][0].id}&pid={{pid}}&hospt=${availability[i].hospitalid_id}&dept=${availability[i].deptid_id}&availday=${availability[i].available_days}&sdate=${appoint}">Book Appointment</a></td>
+						</tr>
+						`
+						   
+						   )
+				}
+				
+				
+			},
+			
+								
+	})
+	
+	
+})
+
+
+   </script>
+	{% endblock %}
