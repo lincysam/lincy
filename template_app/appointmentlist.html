@@ -19,11 +19,22 @@
 				<td>{{i.hospital}}</td>
 				<td>{{i.doctor}}</td>
 				<td>{{i.consult_day}}</td>
-				<td><a href="/patientaccount/cancelpatient?cancelid={{i.id}}&pid={{pid}}">Cancel</td>
+				<td><a onclick="checkcancel()" href="/patientaccount/cancelpatient?cancelid={{i.id}}&pid={{pid}}">Cancel</td>
 			</tr>
 				{% endfor %}
 		</table>
 	</div>
+	
+	<script>
+		function checkcancel()
+		{
+			var result=confirm('do you want to cancel');
+			if(result == false){
+				event.preventDefault();
+			}
+		}
+	</script>
+	
      
 	 {% endblock %}
 	 

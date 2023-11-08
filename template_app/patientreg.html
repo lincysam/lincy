@@ -1,112 +1,115 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<style>
-			body{
-				background-color:LightGray;
-			}
-		</style>
-		
-		{% load static %}  
-    <script src="{% static '/js/patientreg_validation.js' %}" type="text/javascript"></script>  
+		{% load static %}
+		<link rel="stylesheet" href="{% static '/css/stylepatientform.css' %}" />
+		<script src="{% static '/js/patientreg_validation.js' %}" type="text/javascript"></script>
 	</head>
 	<body>
-		<form method="post" action="/patient/registerpatient" name='registration' onsubmit="return pagevalidation()">
-				<h3>{{dmsg}}</h3>
-				<h3>{{umsg}}</h3>
-				<h3>{{emsg}}</h3>
-				<h3>{{mobmsg}}</h3>
-				<h3>{{nmsg}}</h3>
-		<center><h2>Patient Registraion Form</h2></center></br>
+	<div class="container" >
+		<div class="header">
+			<center><h2 id ="head">Patient Registraion Form</h2></center>
+		</div>
+		<form  id="myform" method="post" action="/patient/registerpatient" name='registration' onsubmit="return pagevalidation()">
+				
+		
 			
 				{% csrf_token %}
-			<table cellpadding="1" cellspacing="1" align="center" bgcolor="Bisque" border="1">
-			<tr>
-				<td>
-					<b><label>First Name </label></b> 
-					<input style="margin-left:14px;height:30px" type="text" name="pfname" id="pfname" size="25" required
+			
+			<div class="inputcontrol">
+			
+			
+					<b><label for="firstname">First Name </label></b> 
+					<input  type="text" name="pfname" id="pfname" size="25" required
 					/>
-				</td>
-			</tr>
-			<tr>
-				<td>
+					<small>error message</small>
+					
+			</div><br>	
+				
+			
+			<div class="inputcontrol">
 					<b><label>Last Name </label></b> 
-					<input style="margin-left:14px;height:30px" type="text" name="lname" size="25" required />
-				</td>
-			</tr>
-			<tr>
-				<td>
+					<input  type="text" name="lname" size="25" required />
+					<small>error message</small>
+				
+			</div><br>
+			
+			<div class="inputcontrol">
 					<b><label>House Name</label></b> 
-					<input style="margin-left:14px;height:30px" type="text" name="hname" size="25" required />
-				</td>
-			</tr>
-			<tr>
-				<td>
+					<input  type="text" name="hname" size="25" required />
+					<small>error message</small>
+			</div><br>		
+			<div class="inputcontrol">
 					<b><label>City </label></b> 
-					<input style="margin-left:30px;height:30px" type="text" name="cityname" size="25" required />
-				</td>
-			</tr></br>
-			<tr>
-				<td>
+					<input  type="text" name="cityname" size="25" required />
+					<small>error message</small>
+			</div><br>	
+				
+			
+			<div class="inputcontrol">
 					<b><label>States</label></b> 
-					<select name="statename"style="margin-left:18px;height:30px" id="states">
+					<select name="statename" id="states" class="inputcontrol"style="margin-left:18px;height:30px">
 						
 						<option value="select">--select--</option>
 							{% for states in statedata %}
 						<option value='{{states.id}}'>{{states.statename}}</option>
 							{% endfor %}
 					</select>
-				<td>
-			</tr>
-			<tr>
-				<td>
-					<b><label>Gender</label></b><br>
-					<input type="radio" name="gender" value="male" id="gender"checked/>Male<br>
-					<input type="radio" name="gender" value="female" id="gender" />Female</br></br>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<b><label>DOB</label></b> 
-					<input style="margin-left:14px;height:30px" type="date" name="dob" size="25"/>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<b><label>Email</label></b>
-					<input style="margin-left:14px;height:30px"type="email" name="email" size="25" required />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<b><label>Mobile NO: </label></b> 
-					<input style="margin-left:14px;height:30px" type="text" name="contact" size="25" required />
-				</td>
-			</tr>
-			
-			<tr>
-				<td>
-					<b><label>User Name </label></b> 
-					<input style="margin-left:14px;height:30px" type="text" name="username" size="25" required />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<b><label>Password</label></b> 
-					<input style="margin-left:14px;height:30px" type="password" name="password" size="25" required />
-				</td>
-			</tr>
-			
-			<tr>
+					
+					
+			</div><br>	
 				
-			</tr>
-			<tr>
-				<td>
-					<center><input type="submit" value="SUBMIT" style="background:skyblue"/></center>
-				</td>
-			</tr>
-				</table>
+			
+			
+				
+			<div class="inputcontrol">
+			
+					<b><label>DOB</label></b> 
+					<input  type="date" name="dob" size="25"/>
+					<small>error message</small>
+			</div><br>	
+			<div class="inputcontrol">
+				<b><label>Gender</label></b>
+				<input type="radio" name="gender" value="male" id="gender"checked/>Male
+				<input type="radio" name="gender" value="female" id="gender" />Female
+				
+			</div><br>		
+			
+			<div class="inputcontrol">
+					<b><label>Email</label></b>
+					<input type="email" name="email" size=
+					"25"/>
+					<small>error message</small>
+			</div><br>
+			<div class="inputcontrol">
+					<b><label>Mobile NO: </label></b> 
+					<input  type="number" name="contact" size="25" required />
+					<small>error message</small>
+			</div><br>	
+			
+			
+			<div class="inputcontrol">
+					<b><label>User Name </label></b> 
+					<input  type="text" name="username" size="25" required  autocomplete="off"/>
+					<small>error message</small>
+			</div><br>	
+			
+			<div class="inputcontrol">
+					<b><label>Password</label></b> 
+					<input  type="password" name="password" size="25" required autocomplete="off" />
+					<small>error message</small>
+			</div><br>	
+			
+			
+			
+			<div class="inputcontrol">
+			
+					<center><input type="submit" value="SUBMIT"  class="btnclass"/></center>
+			</div>		
+				
 				
 		</form>
+		</div>
+		
 	</body>
 </html>

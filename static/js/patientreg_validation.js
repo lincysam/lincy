@@ -1,8 +1,58 @@
-function test_details()
-{
-	alert("testing")
-	return false;
+const myform=Document.getElementById('registration');
+const pfname=Document.getElementById('pfname');
+const plname=Document.getElementById('plname');
+const phname=Document.getElementById('hname');
+const pcityname=Document.getElementById('cityname');
+const pstatename=Document.getElementById('states');
+const pdob=Document.getElementById('dob');
+const pemail=Document.getElementById('email');
+const pcontact=Document.getElementById('contact');
+const pusername=Document.getElementById('username');
+const ppwd=Document.getElementById('password');
+
+
+myform.addEventListener('submit',(e) =>{
+	e.preventDefault();
+	validate();
+	
+});
+
+const validate =() =>{
+	const pfname= pfname.value.trim();
+	const plname= plname.value.trim();
+	const phname= phname.value.trim();
+	const pcityname= pcityname.value.trim();
+	const pemail= pemail.value.trim();
+	const pcontact= pcontact.value.trim();
+	const pusername= pusername.value.trim();
+	const ppwd= ppwd.value.trim();
+	function user_validation(pusername,4,12)
+	{     
+		let uid_length=pusername.length;
+		if(uid_length==0||uid_length < 4||uid_length > 12)
+		{
+			seterrormsg(pusername,"Username should not be empty/It should be between"+mi+" and "+ma);
+			//uid.focus();
+			
+		}
+		else{
+			successmsg(pusername)
+		}
+	}
+	
+	function seterrormsg(input,errormsgs){
+	const inputcontrol= input.parentElement;
+	const small = inputcontrol.querySelector('small');
+	inputcontrol.className = "inputcontrol error";
+	small.innerText = errormsgs;
+	}
+	
+	
+
 }
+
+
+
 
 
 
@@ -55,9 +105,10 @@ function pagevalidation()
 	}
 	}
 	}
-	//return false;
-}
-
+	
+	
+	}
+	
 
 
 	function user_validation(uid,mi,ma)
@@ -90,8 +141,9 @@ function pagevalidation()
 			return true;
 		}
 		else
-		{	
-			alert("Name must be Characters only");
+		{	alert("Name must be Characters only");
+			
+			
 			
 			return false;
 		}

@@ -13,7 +13,7 @@
 					<td> {{i.hospital}}</td>
 					<td>{{i.available_days}}</td>
 					
-					<td><a href="/doctoraccount/doctordelete?eachid={{i.id}}&doctorid={{docid}}" > Delete</a></td>
+					<td><a onclick= "checkdelete()" href="/doctoraccount/doctordelete?eachid={{i.id}}&doctorid={{docid}}"> Delete</a></td>
 					<td><a href="/doctoraccount/doctorupdate?eachid={{i.id}}&doctorid={{docid}}">Edit</a></td>
 					
 				</tr>
@@ -21,4 +21,16 @@
 				
 			</table>
 		
-		 {% endblock %}
+		 
+		 
+		<script>
+			function checkdelete()
+			{	var result=confirm('Are you sure to delete');
+				if(result == false){
+					event.preventDefault();
+				}
+				
+				
+			}
+		</script>
+		{% endblock %}
